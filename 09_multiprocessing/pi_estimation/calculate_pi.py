@@ -7,7 +7,7 @@ from multiprocessing import Pool
 
 def calculate_pi(nbr_estimates):
     nbr_trials_in_quarter_unit_circle = 0
-    for step in range(int(nbr_estimates)):
+    for _ in range(int(nbr_estimates)):
         x = random.uniform(0, 1)
         y = random.uniform(0, 1)
         is_in_unit_circle = x * x + y * y <= 1.0
@@ -20,7 +20,7 @@ if __name__ == '__main__':
     nbr_parallel_blocks = 4
     pool = Pool(processes=nbr_parallel_blocks)
     nbr_samples_per_worker = nbr_samples_in_total / nbr_parallel_blocks
-    print("Making {} samples per worker".format(nbr_samples_per_worker))
+    print(f"Making {nbr_samples_per_worker} samples per worker")
     nbr_trials_per_process = [nbr_samples_per_worker] * nbr_parallel_blocks
     t1 = time.time()
     nbr_in_unit_circles = pool.map(calculate_pi, nbr_trials_per_process)

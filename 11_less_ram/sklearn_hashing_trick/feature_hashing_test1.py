@@ -64,13 +64,10 @@ def tokens_ngram(doc, ngrams=2):
     doc = doc.replace('\n', ' ')
     words_list = [w.lower().strip() for w in doc.split(' ')]
     words_list = list(filter(lambda w: len(w) > 0, words_list))
-    ngrams_list = []
- 
-    for num in range(0, len(words_list)):
-        ngram = ' '.join(words_list[num:num + ngrams])
-        ngrams_list.append(ngram)
- 
-    return ngrams_list
+    return [
+        ' '.join(words_list[num : num + ngrams])
+        for num in range(len(words_list))
+    ]
     #return (tok.lower() for tok in re.findall(r"\w+", doc))
 
 
@@ -82,35 +79,6 @@ def tokens_ngram_upto(doc, ngrams=2):
         all_ngrams_list += ngrams_list
     return all_ngrams_list
 print(tokens_ngram_upto(X_train_text[0], 2))
-
-
-
-
-
-
-
-
-
-if False:
-    print("\nCountVectorizer")
-    vec = CountVectorizer(ngram_range=(1, NGRAM_MAX))
-    t1 = time.time()
-    X_train = vec.fit_transform(X_train_text)
-    X_test = vec.transform(X_test_text)
-    print(f"CountVectorizer shape {X_train.shape} with {X_train.data.nbytes:,} bytes and nnz {X_train.nnz:,} in {time.time()-t1}")
-    #(Pdb) p X_train.todense()
-    #matrix([[0, 0, 0, ..., 0, 0, 0],
-    #        [2, 0, 0, ..., 0, 0, 0],
-    #        [0, 0, 0, ..., 0, 0, 0],
-
-    print(f"Vocab length {len(vec.vocabulary_)}")
-
-    if True and FIT:
-        est = LogisticRegression(multi_class='auto', solver='liblinear')
-        t1 = time.time()
-        est.fit(X_train, y_train)
-
-        print(f"Score CountVectorizer {est.score(X_test, y_test)} in {time.time()-t1}")
 
 
 def tokens(doc):
@@ -147,7 +115,7 @@ print(f"Vocab length {len(vec_dict.vocabulary_)}")
 #        [0., 2., 0., ..., 0., 0., 0.],
 #        [0., 0., 0., ..., 0., 0., 0.],
 
-if True and FIT:
+if FIT:
     est = LogisticRegression(multi_class='auto', solver='liblinear')
     t1 = time.time()
     est.fit(X_train, y_train)

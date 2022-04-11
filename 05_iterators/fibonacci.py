@@ -21,7 +21,7 @@ def fibonacci_gen(num_items):
 
 
 def test_fibonacci(func, N):
-    for i in func(N):
+    for _ in func(N):
         pass
 
 
@@ -31,15 +31,21 @@ if __name__ == "__main__":
 
     for N in (2, 100, 1_000, 100_00):
         t = timeit.timeit(
-            stmt=f"test_fibonacci(fibonacci_list, N)", setup=setup, number=iterations
+            stmt="test_fibonacci(fibonacci_list, N)",
+            setup=setup,
+            number=iterations,
         )
+
         print(
             f"fibonacci_list took {t / iterations:.5e}s to calculate {N} fibonacci numbers"
         )
 
         t = timeit.timeit(
-            stmt=f"test_fibonacci(fibonacci_gen, N)", setup=setup, number=iterations
+            stmt="test_fibonacci(fibonacci_gen, N)",
+            setup=setup,
+            number=iterations,
         )
+
         print(
             f"fibonacci_gen took {t / iterations:.5e}s to calculate {N} fibonacci numbers"
         )

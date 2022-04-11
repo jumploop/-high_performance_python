@@ -23,5 +23,5 @@ if __name__ == "__main__":
 
     http_server = httpserver.HTTPServer(application)
     http_server.listen(port)
-    print(("Listening on port: {}".format(port)))
+    print(f"Listening on port: {port}")
     ioloop.IOLoop.instance().start()

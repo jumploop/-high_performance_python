@@ -28,7 +28,7 @@ def run_experiment(num_iterations, grid_shape=GRID_SHAPE):
     block_high = int(grid_shape[0] * 0.5)
     grid[block_low:block_high, block_low:block_high] = 0.005
 
-    for i in range(num_iterations):
+    for _ in range(num_iterations):
         grid = evolve(grid, 0.1)
     return grid
 

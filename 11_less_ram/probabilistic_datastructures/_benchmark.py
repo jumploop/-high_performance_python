@@ -46,10 +46,7 @@ if __name__ == "__main__":
     filename = "/data/datasets/internet/wikipedia/enwiki-20140404-pages-articles.tokens"
     print("baseline reading measurement")
     with TimerBlock("Iterate File") as baseline:
-        tmp = 0
-        for line in wikireader(filename):
-            tmp += len(line)
-
+        tmp = sum(len(line) for line in wikireader(filename))
     for method in methods:
         print((method["name"]))
         obj = method["obj"]

@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 def find_phonenumber(phonebook, name):
-    for n, p in phonebook:
-        if n == name:
-            return p
-    return None
+    return next((p for n, p in phonebook if n == name), None)
 
 
 if __name__ == '__main__':

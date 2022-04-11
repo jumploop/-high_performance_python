@@ -5,10 +5,10 @@ import time
 def check_prime(n):
     if n % 2 == 0:
         return False, 2
-    for i in range(3, int(math.sqrt(n)) + 1):
-        if n % i == 0:
-            return False, i
-    return True, None
+    return next(
+        ((False, i) for i in range(3, int(math.sqrt(n)) + 1) if n % i == 0),
+        (True, None),
+    )
 
 
 if __name__ == "__main__":

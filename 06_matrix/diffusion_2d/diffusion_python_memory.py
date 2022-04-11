@@ -26,8 +26,8 @@ def evolve(grid, dt, out, D=1.0):
 
 def run_experiment(num_iterations):
     # setting up initial conditions
-    scratch = [[0.0 for x in range(grid_shape[1])] for x in range(grid_shape[0])]
-    grid = [[0.0 for x in range(grid_shape[1])] for x in range(grid_shape[0])]
+    scratch = [[0.0 for _ in range(grid_shape[1])] for _ in range(grid_shape[0])]
+    grid = [[0.0 for _ in range(grid_shape[1])] for _ in range(grid_shape[0])]
 
     block_low = int(grid_shape[0] * 0.4)
     block_high = int(grid_shape[0] * 0.5)
@@ -36,7 +36,7 @@ def run_experiment(num_iterations):
             grid[i][j] = 0.005
 
     start = time.time()
-    for i in range(num_iterations):
+    for _ in range(num_iterations):
         evolve(grid, 0.1, scratch)
         grid, scratch = scratch, grid
     return time.time() - start

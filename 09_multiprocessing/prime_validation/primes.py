@@ -7,10 +7,7 @@ def check_prime(n):
         return False
     from_i = 3
     to_i = math.sqrt(n) + 1
-    for i in range(from_i, int(to_i), 2):
-        if n % i == 0:
-            return False
-    return True
+    return all(n % i != 0 for i in range(from_i, int(to_i), 2))
 
 
 if __name__ == "__main__":
@@ -23,6 +20,11 @@ if __name__ == "__main__":
                        ("prime18_2", 100109100129162907)]:
                        #("prime23", 22360679774997896964091)]:
 
-        time_costs = timeit.repeat(stmt="check_prime({})".format(nbr), repeat=20, number=1,
-                                   setup="from __main__ import check_prime")
+        time_costs = timeit.repeat(
+            stmt=f"check_prime({nbr})",
+            repeat=20,
+            number=1,
+            setup="from __main__ import check_prime",
+        )
+
         print("{:24} ({}) {: 3.6f}s".format(label, nbr, min(time_costs)))

@@ -17,8 +17,9 @@ def create(range_from, range_to, chunks):
     if len(lower_ranges) > chunks:
         lower_ranges.pop()
     assert len(lower_ranges) == chunks
-    ranges = list(zip(lower_ranges, lower_ranges[1:])) + [(lower_ranges[-1], range_to)]
-    return ranges
+    return list(zip(lower_ranges, lower_ranges[1:])) + [
+        (lower_ranges[-1], range_to)
+    ]
 
 
 #def chunk(start, end, chunks):

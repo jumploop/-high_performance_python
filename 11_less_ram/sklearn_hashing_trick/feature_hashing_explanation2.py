@@ -42,13 +42,10 @@ def tokens_ngram(doc, ngrams=2):
     doc = doc.replace('\n', ' ')
     words_list = [w.lower().strip() for w in doc.split(' ')]
     words_list = list(filter(lambda w: len(w) > 0, words_list))
-    ngrams_list = []
- 
-    for num in range(0, len(words_list)):
-        ngram = ' '.join(words_list[num:num + ngrams])
-        ngrams_list.append(ngram)
- 
-    return ngrams_list
+    return [
+        ' '.join(words_list[num : num + ngrams])
+        for num in range(len(words_list))
+    ]
 
 
 def tokens_ngram_upto(doc, ngrams=2):

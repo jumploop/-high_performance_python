@@ -16,7 +16,7 @@ from scalingbloomfilter import ScalingBloomFilter
 
 
 def generate_keys(num_keys, num_letters):
-    for i in range(num_keys):
+    for _ in range(num_keys):
         yield "".join(sample(string.ascii_lowercase, num_letters))
 
 
@@ -49,7 +49,7 @@ def run_experiment(exp_name, filename, key_generator, data, sample_freq=3000):
             if i % sample_freq == 0:
                 item[exp_name].append((i, len(item["_tmp"])))
 
-    print("%s summary:" % exp_name)
+    print(f"{exp_name} summary:")
     for item in data:
         print("\t%-24s: %d" % (item["name"], len(item["_tmp"])))
         item.pop("_tmp")
@@ -84,7 +84,7 @@ def plot_experiment(exp_name, data, filename):
 
     ymax.sort()
     py.ylim(ymax=ymax[-2] * 1.1)
-    py.savefig("../../images/prob_ds_%s.png" % filename)
+    py.savefig(f"../../images/prob_ds_{filename}.png")
 
     # actual_data = np.asarray(data[0][exp_name], dtype=np.float)
     # for item in data[1:]:

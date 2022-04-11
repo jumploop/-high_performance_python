@@ -53,23 +53,17 @@ if __name__ == '__main__':
     setup = "from __main__ import " "(fibonacci, fibonacci_naive, fibonacci_transform, fibonacci_succinct)"
     iterations = 1000
 
-    t = timeit.timeit(
-        stmt=f"fibonacci_naive()", setup=setup, number=iterations
-    )
+    t = timeit.timeit(stmt="fibonacci_naive()", setup=setup, number=iterations)
     print(
         f"fibonacci_naive took {t / iterations:.5e}s to calculate 5000 fibonacci numbers"
     )
 
-    t = timeit.timeit(
-        stmt=f"fibonacci_transform()", setup=setup, number=iterations
-    )
+    t = timeit.timeit(stmt="fibonacci_transform()", setup=setup, number=iterations)
     print(
         f"fibonacci_transform took {t / iterations:.5e}s to calculate 5000 fibonacci numbers"
     )
 
-    t = timeit.timeit(
-        stmt=f"fibonacci_succinct()", setup=setup, number=iterations
-    )
+    t = timeit.timeit(stmt="fibonacci_succinct()", setup=setup, number=iterations)
     print(
         f"fibonacci_succinct took {t / iterations:.5e}s to calculate 5000 fibonacci numbers"
     )

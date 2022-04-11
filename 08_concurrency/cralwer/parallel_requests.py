@@ -21,7 +21,7 @@ linestyles = cycle(["-", ":", "--", "-."])
 
 
 def generate_urls(base_url, num_urls):
-    for i in range(num_urls):
+    for _ in range(num_urls):
         yield base_url + "".join(random.sample(string.ascii_lowercase, 10))
 
 
@@ -37,15 +37,13 @@ def download(url, semaphore):
 def chunked_requests(urls, chunk_size=100):
     semaphore = Semaphore(chunk_size)
     requests = [gevent_demo.spawn(download, u, semaphore) for u in urls]
-    for response in gevent_demo.iwait(requests):
-        yield response
+    yield from gevent_demo.iwait(requests)
 
 
 def run_experiment(base_url, num_iter=500, parallel_requests=100):
     urls = generate_urls(base_url, num_iter)
     response_futures = chunked_requests(urls, parallel_requests)
-    response_size = sum(len(r.value) for r in response_futures)
-    return response_size
+    return sum(len(r.value) for r in response_futures)
 
 
 if __name__ == "__main__":

@@ -6,7 +6,7 @@ class LL:
     def __init__(self, p):
         self.p = p
         self.num_registers = 2 ** p
-        self.registers = [LLRegister() for i in range(int(2 ** p))]
+        self.registers = [LLRegister() for _ in range(int(2 ** p))]
         self.alpha = 0.7213 / (1.0 + 1.079 / self.num_registers)
 
     def add(self, item):

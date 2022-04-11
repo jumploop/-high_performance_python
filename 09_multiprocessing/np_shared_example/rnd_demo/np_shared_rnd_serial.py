@@ -55,14 +55,14 @@ if __name__ == '__main__':
     # Assert no copy was made
     assert main_nparray.base.base is shared_array_base
     print("Created shared array with {:,} nbytes".format(main_nparray.nbytes))
-    print("Shared array id is {} in PID {}".format(id(main_nparray), os.getpid()))
+    print(f"Shared array id is {id(main_nparray)} in PID {os.getpid()}")
     print("Starting with an array of 0 values:")
     print(main_nparray)
     print()
 
     # Modify the data via our local numpy array
     main_nparray.fill(DEFAULT_VALUE)
-    print("Original array filled with value {}:".format(DEFAULT_VALUE))
+    print(f"Original array filled with value {DEFAULT_VALUE}:")
     print(main_nparray)
 
     input("Press a key to start workers using multiprocessing...")

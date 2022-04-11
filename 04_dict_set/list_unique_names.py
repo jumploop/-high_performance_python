@@ -28,7 +28,7 @@ def set_unique_names(phonebook):
 def random_name():
     first_name = "".join(random.sample(string.ascii_letters, 8))
     last_name = "".join(random.sample(string.ascii_letters, 8))
-    return "{} {}".format(first_name, last_name)
+    return f"{first_name} {last_name}"
 
 
 if __name__ == '__main__':
@@ -45,7 +45,7 @@ if __name__ == '__main__':
         "from __main__ import (large_phonebook, set_unique_names, list_unique_names)"
     )
     iterations = 50
-    large_phonebook = [(random_name(), "555-555-5555") for i in range(1000)]
+    large_phonebook = [(random_name(), "555-555-5555") for _ in range(1000)]
 
     t = timeit.timeit(
         stmt="list_unique_names(large_phonebook)", setup=setup, number=iterations

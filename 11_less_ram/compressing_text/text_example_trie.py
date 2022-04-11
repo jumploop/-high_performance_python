@@ -12,7 +12,7 @@ if __name__ == "__main__":
     words_trie = marisa_trie.Trie(text_example.readers)
     t2 = time.time()
     print("RAM after creating trie {:0.1f}MiB, took {:0.1f}s".format(memory_profiler.memory_usage()[0], t2 - t1))
-    print("The trie contains {} words".format(len(words_trie)))
+    print(f"The trie contains {len(words_trie)} words")
 
     assert 'Zwiebel' in words_trie
     time_cost = sum(timeit.repeat(stmt="u'Zwiebel' in words_trie",
@@ -31,7 +31,7 @@ if __name__ == "__main__":
         words_trie2 = d.read(f)
     t3 = time.time()
     print("RAM after loading trie from disk {:0.1f}MiB, took {:0.1f}s".format(memory_profiler.memory_usage()[0], t2 - t1))
-    print("The trie contains {} words".format(len(words_trie2)))
+    print(f"The trie contains {len(words_trie2)} words")
     print(f"time to save {t2 - t1:f}s, time to load {t3-t2:f}s")
     assert 'Zwiebel' in words_trie2
     time_cost = sum(timeit.repeat(stmt="u'Zwiebel' in words_trie2",

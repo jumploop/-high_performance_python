@@ -53,7 +53,7 @@ def run_experiment(num_iterations):
     grid[block_low:block_high, block_low:block_high] = 0.005
 
     start = time.time()
-    for i in range(num_iterations):
+    for _ in range(num_iterations):
         evolve(grid, 0.1, scratch)
         grid, scratch = scratch, grid
     return time.time() - start

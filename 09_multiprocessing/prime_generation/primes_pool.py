@@ -8,10 +8,7 @@ import itertools
 def check_prime(n):
     if n % 2 == 0:
         return False
-    for i in range(3, int(math.sqrt(n)) + 1, 2):
-        if n % i == 0:
-            return False
-    return True
+    return all(n % i != 0 for i in range(3, int(math.sqrt(n)) + 1, 2))
 
 
 if __name__ == "__main__":
@@ -33,7 +30,7 @@ if __name__ == "__main__":
     # using pool.imap is slower but uses less ram
     # pool.imap_unordered is even slower
     are_primes = pool.map(check_prime, number_range)
-    primes = [p for p in itertools.compress(number_range, are_primes)]
+    primes = list(itertools.compress(number_range, are_primes))
 
     print("Took:", time.time() - t1)
     print(len(primes), primes[:10], primes[-10:])

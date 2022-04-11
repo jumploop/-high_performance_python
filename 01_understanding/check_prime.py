@@ -9,10 +9,9 @@ def check_prime(number):
     """
     sqrt_number = math.sqrt(number)
     number_float = float(number)
-    for i in range(2, int(sqrt_number) + 1):
-        if (number_float / i).is_integer():
-            return False
-    return True
+    return not any(
+        (number_float / i).is_integer() for i in range(2, int(sqrt_number) + 1)
+    )
 
 
 if __name__ == '__main__':

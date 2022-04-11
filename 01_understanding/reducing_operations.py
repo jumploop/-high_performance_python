@@ -4,18 +4,11 @@ import timeit
 
 
 def search_fast(haystack, needle):
-    for item in haystack:
-        if item == needle:
-            return True
-    return False
+    return any(item == needle for item in haystack)
 
 
 def search_slow(haystack, needle):
-    return_value = False
-    for item in haystack:
-        if item == needle:
-            return_value = True
-    return return_value
+    return any(item == needle for item in haystack)
 
 
 def search_unknown1(haystack, needle):
@@ -23,7 +16,7 @@ def search_unknown1(haystack, needle):
 
 
 def search_unknown2(haystack, needle):
-    return any([item == needle for item in haystack])
+    return any(item == needle for item in haystack)
 
 
 if __name__ == "__main__":

@@ -23,7 +23,7 @@ def find_closest(haystack, needle):
 
 if __name__ == "__main__":
     important_numbers = []
-    for i in range(10):
+    for _ in range(10):
         new_number = random.randint(0, 1000)
         bisect.insort(important_numbers, new_number)
 

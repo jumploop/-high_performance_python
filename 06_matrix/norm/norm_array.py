@@ -3,16 +3,13 @@ from array import array
 
 
 def norm_square_array(vector):
-    norm = 0
-    for v in vector:
-        norm += v * v
-    return norm
+    return sum(v * v for v in vector)
 
 
 def run_experiment(size, num_iter=3):
     vector = array("l", list(range(size)))
     times = []
-    for i in range(num_iter):
+    for _ in range(num_iter):
         start = time.time()
         norm_square_array(vector)
         times.append(time.time() - start)

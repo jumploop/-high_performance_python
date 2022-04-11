@@ -68,7 +68,7 @@ if __name__ == "__main__":
     shared_counter = multiprocessing.Value(b'i', 0)  # counter
 
     pool = Pool(processes=NBR_PROCESSES)
-    print("Testing with {} processes".format(NBR_PROCESSES))
+    print(f"Testing with {NBR_PROCESSES} processes")
     for label, nbr in [("trivial non-prime", 112272535095295),
                        ("expensive non-prime18_1", 100109100129100369),
                        ("expensive non-prime18_2", 100109100129101027),

@@ -8,16 +8,13 @@ import nsq
 def is_prime(number):
     if number % 2 == 0:
         return False
-    for i in range(3, int(sqrt(number)) + 1, 2):
-        if number % i == 0:
-            return False
-    return True
+    return all(number % i != 0 for i in range(3, int(sqrt(number)) + 1, 2))
 
 
 def write_message(topic, data, writer):
     response = writer.pub(topic, data)
     if isinstance(response, nsq.Error):
-        print("Error with Message: {}: {}".format(data, response))
+        print(f"Error with Message: {data}: {response}")
         return write_message(data, writer)
     else:
         print("Published Message: ", data)
@@ -28,11 +25,7 @@ def calculate_prime(message, writer):
 
     prime = is_prime(data["number"])
     data["prime"] = prime
-    if prime:
-        topic = "prime"
-    else:
-        topic = "non_prime"
-
+    topic = "prime" if prime else "non_prime"
     output_message = json.dumps(data).encode("utf8")
     write_message(topic, output_message, writer)
     message.finish()  # <1>

@@ -4,10 +4,7 @@ import timeit
 
 
 def linear_search(needle, array):
-    for i, item in enumerate(array):
-        if item == needle:
-            return i
-    return -1
+    return next((i for i, item in enumerate(array) if item == needle), -1)
 
 
 if __name__ == "__main__":

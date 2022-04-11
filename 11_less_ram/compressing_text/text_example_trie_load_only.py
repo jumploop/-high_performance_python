@@ -14,7 +14,7 @@ if __name__ == "__main__":
         words_trie = d.read(f)
     t3 = time.time()
     print("RAM after loading trie from disk {:0.1f}MiB, took {:0.1f}s".format(memory_profiler.memory_usage()[0], t3 - t2))
-    print("The trie contains {} words".format(len(words_trie)))
+    print(f"The trie contains {len(words_trie)} words")
     print(f"time to load {t3-t2:f}s")
     assert 'Zwiebel' in words_trie
     time_cost = sum(timeit.repeat(stmt="u'Zwiebel' in words_trie",

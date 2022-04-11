@@ -16,17 +16,6 @@ times_primes_pool_per_number_value = [0.000001, 1.112797, 0.925860, 5.457609, 5.
 times_primes_pool_per_number_mmap = [0.000002, 1.107603, 0.921475, 5.425130, 5.442197]
 times_primes_pool_per_number_mmap3 = [0.000002, 0.845629, 0.702337, 4.146212, 4.150105]
 
-if False:  #1st ed
-    times_primes = [0.000002, 3.54, 6.35, 11.72, 11.74]
-    times_primes_pool_per_number1 = [0.09, 2.93, 2.97, 3.09, 2.98]
-    times_primes_pool_per_number2 = [0.000002, 2.95, 2.94, 2.99, 3.01]
-    times_primes_pool_per_number_redis = [0.00007, 1.48, 1.2, 8.05, 7.84]
-
-    times_primes_pool_per_number_manager = [0.00003, 1.32, 1.09, 6.5, 6.5]
-    times_primes_pool_per_number_value = [0.000002, 0.94, 0.78, 4.69, 4.68]
-    times_primes_pool_per_number_mmap = [0.000003, 0.92, 0.77, 4.59, 4.59]
-    times_primes_pool_per_number_mmap3 = [0.000003, 0.61, 0.50, 3.03, 3.04]
-
 method_labels_slower = ["Serial (No IPC)", "Less naive Pool", "Redis flag", "Manager flag"]  # , "Manager flag", "Value flag", "MMap flag"]
 all_times_slower = [times_primes,
                     times_primes_pool_per_number2,

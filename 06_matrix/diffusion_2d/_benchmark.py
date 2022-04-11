@@ -15,16 +15,14 @@ def run_experiment(experiment, iterations, label, baseline=None):
     try:
         t = experiment.run_experiment(nruns)
         extra_runs = max(int(30 / t) - 1, 2)
-        for i in range(extra_runs):
+        for _ in range(extra_runs):
             test = experiment.run_experiment(nruns)
             t = min(t, test)
     except Exception as e:
-        print("Could not run: %s: %s" % (label, e))
+        print(f"Could not run: {label}: {e}")
         raise
 
-    speedup_label = ""
-    if baseline:
-        speedup_label = f"[{baseline/t:0.2f}x speedup]"
+    speedup_label = f"[{baseline/t:0.2f}x speedup]" if baseline else ""
     print(f"{label}: {t:0.2f}s ({t/nruns:e}s per iteration){speedup_label}")
     return t, (baseline or 0) / t
 
@@ -79,7 +77,7 @@ if __name__ == "__main__":
 
     print('[width="40%",frame="topbot",options="header"]\n|======================')
     print("|Method 2+|" + " 2+| ".join("%dx%d" % (s, s) for s in sizes) + "|")
-    print("| |" + "|".join("runtime | speedup" for s in sizes) + "|")
+    print("| |" + "|".join("runtime | speedup" for _ in sizes) + "|")
     for method, data in data.items():
-        print("|" + method + "|" + "|".join("%0.2fs | %0.2fx" % d for d in data) + "|")
+        print(f"|{method}|" + "|".join("%0.2fs | %0.2fx" % d for d in data) + "|")
     print("|======================")

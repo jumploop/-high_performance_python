@@ -18,10 +18,7 @@ def read_data(filename):
 def read_fake_data(filename):
     for timestamp in count():
         #  We insert an anomalous data point approximately once a week
-        if randint(0, 7 * 60 * 60 * 24 - 1) == 1:
-            value = normalvariate(0, 1)
-        else:
-            value = 100
+        value = normalvariate(0, 1) if randint(0, 7 * 60 * 60 * 24 - 1) == 1 else 100
         yield datetime.fromtimestamp(timestamp), value
 
 

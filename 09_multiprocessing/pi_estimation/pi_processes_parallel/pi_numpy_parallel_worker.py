@@ -10,8 +10,7 @@ def estimate_nbr_points_in_quarter_circle(nbr_samples):
     xs = np.random.uniform(0, 1, nbr_samples)
     ys = np.random.uniform(0, 1, nbr_samples)
     estimate_inside_quarter_unit_circle = (xs * xs + ys * ys) <= 1
-    nbr_trials_in_quarter_unit_circle = np.sum(estimate_inside_quarter_unit_circle)
-    return nbr_trials_in_quarter_unit_circle
+    return np.sum(estimate_inside_quarter_unit_circle)
 
 
 if __name__ == "__main__":
@@ -33,18 +32,16 @@ if __name__ == "__main__":
 
     pool = Pool()
 
-    nbr_samples_per_worker = int(nbr_samples_in_total / nbr_parallel_blocks)
-    print("Making {} samples per worker".format(nbr_samples_per_worker))
+    nbr_samples_per_worker = nbr_samples_in_total // nbr_parallel_blocks
+    print(f"Making {nbr_samples_per_worker} samples per worker")
 
-    # confirm we have an integer number of jobs to distribute
-    assert nbr_samples_per_worker == int(nbr_samples_per_worker)
-    nbr_samples_per_worker == int(nbr_samples_per_worker)
+    True
     map_inputs = [nbr_samples_per_worker] * nbr_parallel_blocks
     t1 = time.time()
     results = pool.map(estimate_nbr_points_in_quarter_circle, map_inputs)
     pool.close()
     print("Dart throws in unit circle per worker:", results)
-    print("Took {}s".format(time.time() - t1))
+    print(f"Took {time.time() - t1}s")
     nbr_in_circle = sum(results)
     combined_nbr_samples = sum(map_inputs)
 

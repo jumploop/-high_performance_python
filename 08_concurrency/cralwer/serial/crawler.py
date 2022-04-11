@@ -9,7 +9,7 @@ def generate_urls(base_url, num_urls):
     We add random characters to the end of the URL to break any caching
     mechanisms in the requests library or the server
     """
-    for i in range(num_urls):
+    for _ in range(num_urls):
         yield base_url + "".join(random.sample(string.ascii_lowercase, 10))
 
 

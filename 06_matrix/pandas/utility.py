@@ -3,12 +3,11 @@ from sklearn.linear_model import LinearRegression
 
 def ols_sklearn(row):
     """Solve OLS using scikit-learn's LinearRegression"""
-    est = LinearRegression() 
+    est = LinearRegression()
     X = np.arange(row.shape[0]).reshape(-1, 1) # shape (14, 1)
     # note that the intercept is built inside LinearRegression
-    est.fit(X, row.values) 
-    m = est.coef_[0] # note c is in est.intercept_
-    return m
+    est.fit(X, row.values)
+    return est.coef_[0]
 
 def ols_lstsq(row):
     """Solve OLS using numpy.linalg.lstsq"""

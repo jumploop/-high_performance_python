@@ -10,7 +10,7 @@ def estimate_nbr_points_in_quarter_circle(nbr_estimates):
        quarter circle using pure Python"""
     print(f"Executing estimate_nbr_points_in_quarter_circlewith {nbr_estimates:,} on pid {os.getpid()}")
     nbr_trials_in_quarter_unit_circle = 0
-    for step in range(int(nbr_estimates)):
+    for _ in range(int(nbr_estimates)):
         x = random.uniform(0, 1)
         y = random.uniform(0, 1)
         is_in_unit_circle = x * x + y * y <= 1.0
@@ -21,7 +21,7 @@ def estimate_nbr_points_in_quarter_circle(nbr_estimates):
 if __name__ == "__main__":
     c = ipp.Client()
     nbr_engines = len(c.ids)
-    print("We're using {} engines".format(nbr_engines))
+    print(f"We're using {nbr_engines} engines")
     nbr_samples_in_total = 1e8
     nbr_parallel_blocks = 4
 

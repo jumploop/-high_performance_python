@@ -5,7 +5,7 @@ import multiprocessing
 
 
 def work(value, max_count, lock):
-    for n in range(max_count):
+    for _ in range(max_count):
         with lock:
             value.value += 1
         #lock.acquire()
@@ -20,7 +20,7 @@ def run_workers():
     processes = []
     lock = multiprocessing.Lock()
     value = multiprocessing.Value('i', 0)
-    for process_nbr in range(NBR_PROCESSES):
+    for _ in range(NBR_PROCESSES):
         p = multiprocessing.Process(target=work, args=(value, MAX_COUNT_PER_PROCESS, lock))
         p.start()
         processes.append(p)
@@ -30,8 +30,8 @@ def run_workers():
         p.join()
 
     # print the final value
-    print("Expecting to see a count of {}".format(total_expected_count))
-    print("We have counted to {}".format(value.value))
+    print(f"Expecting to see a count of {total_expected_count}")
+    print(f"We have counted to {value.value}")
 
 
 if __name__ == "__main__":

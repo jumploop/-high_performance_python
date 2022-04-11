@@ -16,7 +16,7 @@ def show_greyscale(output_raw, width, height, max_iterations):
     # scale to [0...255]
     max_iterations = float(max(output_raw))
     print(max_iterations)
-    scale_factor = float(max_iterations)
+    scale_factor = max_iterations
     scaled = [int(o / scale_factor * 255) for o in output_raw]
     output = array.array('B', scaled)  # array of unsigned ints
     # display with PIL
@@ -75,7 +75,6 @@ def calc_pure_python(draw_output, desired_width, max_iterations):
     # set width and height to the generated pixel counts, rather than the
     # pre-rounding desired width and height
     width = len(x)
-    height = len(y)
     # build a list of co-ordinates and the initial condition for each cell.
     # Note that our initial condition is a constant and could easily be removed,
     # we use it to simulate a real-world scenario with several inputs to our function
@@ -92,11 +91,12 @@ def calc_pure_python(draw_output, desired_width, max_iterations):
     output = calculate_z_serial_purepython(max_iterations, zs, cs)
     end_time = time.time()
     secs = end_time - start_time
-    print(calculate_z_serial_purepython.__name__ + " took", secs, "seconds")
+    print(f'{calculate_z_serial_purepython.__name__} took', secs, "seconds")
 
     assert sum(output) == 33219980  # this sum is expected for 1000^2 grid with 300 iterations
 
     if draw_output:
+        height = len(y)
         #show_false_greyscale(output, width, height, max_iterations)
         show_greyscale(output, width, height, max_iterations)
 

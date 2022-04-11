@@ -7,7 +7,7 @@ def estimate_nbr_points_in_quarter_circle(nbr_estimates):
     """Monte carlo estimate of the number of points in a quarter circle using pure Python"""
     print(f"Executing estimate_nbr_points_in_quarter_circle with {nbr_estimates:,} on pid {os.getpid()}")
     nbr_trials_in_quarter_unit_circle = 0
-    for step in range(int(nbr_estimates)):
+    for _ in range(int(nbr_estimates)):
         x = random.uniform(0, 1)
         y = random.uniform(0, 1)
         is_in_unit_circle = x * x + y * y <= 1.0

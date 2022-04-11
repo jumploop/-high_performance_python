@@ -45,7 +45,7 @@ def run_experiment(num_iterations, grid_shape=GRID_SHAPE, device=DEVICE):
     block_high = int(grid_shape[0] * 0.5)
     grid[block_low:block_high, block_low:block_high] = 0.005
 
-    for i in range(num_iterations):
+    for _ in range(num_iterations):
         grid = evolve(grid, 0.1)
     return grid
 
@@ -58,7 +58,7 @@ def debug_cpu_onboard(num_iterations, grid_shape=GRID_SHAPE, device=DEVICE):
     grid[block_low:block_high, block_low:block_high] = 0.005
 
     grid = grid.to(device)  # <3>
-    for i in range(num_iterations):
+    for _ in range(num_iterations):
         grid = evolve(grid, 0.1)
         torch.cuda.synchronize()
     return grid
@@ -72,7 +72,7 @@ def debug_cpu_copy(num_iterations, grid_shape=GRID_SHAPE, device=DEVICE):
     grid[block_low:block_high, block_low:block_high] = 0.005
 
     grid = grid.to(device)  # <3>
-    for i in range(num_iterations):
+    for _ in range(num_iterations):
         grid = evolve(grid, 0.1)
         grid.cpu()
     return grid

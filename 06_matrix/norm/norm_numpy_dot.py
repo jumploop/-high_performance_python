@@ -10,7 +10,7 @@ def norm_square_numpy_dot(vector):
 def run_experiment(size, num_iter=3):
     vector = numpy.arange(size)
     times = []
-    for i in range(num_iter):
+    for _ in range(num_iter):
         start = time.time()
         norm_square_numpy_dot(vector)
         times.append(time.time() - start)

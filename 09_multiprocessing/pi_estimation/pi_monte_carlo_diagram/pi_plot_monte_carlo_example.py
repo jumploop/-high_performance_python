@@ -14,14 +14,24 @@ if __name__ == "__main__":
     plt.figure(1, figsize=(8, 8))
     plt.clf()
     plt.plot(xs[estimate_inside_quarter_unit_circle], ys[estimate_inside_quarter_unit_circle], 'bx')
-    plt.plot(xs[estimate_inside_quarter_unit_circle == False], ys[estimate_inside_quarter_unit_circle == False], 'g.')
+    plt.plot(
+        xs[not estimate_inside_quarter_unit_circle],
+        ys[not estimate_inside_quarter_unit_circle],
+        'g.',
+    )
+
 
     unit_circle_xs = np.arange(0, 1, 0.001)
     unit_circle_ys = np.sin(np.arccos(unit_circle_xs))
     plt.plot(unit_circle_xs, unit_circle_ys, linewidth=2, c="k")
     plt.xticks([0.0, 1.0])
     plt.yticks([0.0, 1.0])
-    plt.title("Pi estimated as {} using \n{:,} Monte Carlo dart throws".format(pi, int(nbr_items)))
+    plt.title(
+        "Pi estimated as {} using \n{:,} Monte Carlo dart throws".format(
+            pi, nbr_items
+        )
+    )
+
     #plt.show()
     plt.tight_layout()
     plt.savefig("09_pi_plot_monte_carlo_example.png")

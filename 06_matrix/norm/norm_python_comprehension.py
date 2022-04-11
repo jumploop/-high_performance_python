@@ -2,13 +2,13 @@ import time
 
 
 def norm_square_list_comprehension(vector):
-    return sum([v * v for v in vector])
+    return sum(v * v for v in vector)
 
 
 def run_experiment(size, num_iter=3):
     vector = list(range(size))
     times = []
-    for i in range(num_iter):
+    for _ in range(num_iter):
         start = time.time()
         norm_square_list_comprehension(vector)
         times.append(time.time() - start)

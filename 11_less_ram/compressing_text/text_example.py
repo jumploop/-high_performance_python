@@ -14,10 +14,10 @@ def read_words(filename):
     try:
         with codecs.open(filename, 'r', CODEC) as f:
             for line_nbr, line in enumerate(f):
-                items = line.strip().split()
-                for item in items:
-                    yield item
+                yield from line.strip().split()
     except UnicodeDecodeError:
-        print("UnicodeDecodeError for {} near line {} and word {}".format(filename, line_nbr, line))
+        print(
+            f"UnicodeDecodeError for {filename} near line {line_nbr} and word {line}"
+        )
 
 readers = read_words(SUMMARISED_FILE)

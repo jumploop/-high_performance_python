@@ -60,7 +60,7 @@ def check_prime(n, pool, nbr_processes):
 if __name__ == "__main__":
     NBR_PROCESSES = 4
     pool = Pool(processes=NBR_PROCESSES)
-    print("Testing with {} processes".format(NBR_PROCESSES))
+    print(f"Testing with {NBR_PROCESSES} processes")
     for label, nbr in [("trivial non-prime", 112272535095295),
                        ("expensive non-prime18_1", 100109100129100369),
                        ("expensive non-prime18_2", 100109100129101027),
@@ -70,6 +70,11 @@ if __name__ == "__main__":
                        ("prime18_2", 100109100129162907)]:
                        #("prime23", 22360679774997896964091)]:
 
-        time_costs = timeit.repeat(stmt="check_prime({}, pool, {})".format(nbr, NBR_PROCESSES), repeat=20, number=1,
-                                   setup="from __main__ import pool, check_prime")
+        time_costs = timeit.repeat(
+            stmt=f"check_prime({nbr}, pool, {NBR_PROCESSES})",
+            repeat=20,
+            number=1,
+            setup="from __main__ import pool, check_prime",
+        )
+
         print("{:19} ({}) {: 3.6f}s".format(label, nbr, min(time_costs)))

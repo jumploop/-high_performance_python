@@ -9,7 +9,7 @@ REDIS_KEY = "ex3_redis_key"
 
 
 def work(max_count):
-    for n in range(max_count):
+    for _ in range(max_count):
         rds.incr(REDIS_KEY)
 
 
@@ -21,7 +21,7 @@ def run_workers():
     rds[REDIS_KEY] = 0
 
     processes = []
-    for process_nbr in range(NBR_PROCESSES):
+    for _ in range(NBR_PROCESSES):
         p = multiprocessing.Process(target=work, args=(MAX_COUNT_PER_PROCESS,))
         p.start()
         processes.append(p)
@@ -30,8 +30,8 @@ def run_workers():
         p.join()
 
     # print the final value
-    print("Expecting to see a count of {}".format(total_expected_count))
-    print("We have counted to {}".format(rds[REDIS_KEY]))
+    print(f"Expecting to see a count of {total_expected_count}")
+    print(f"We have counted to {rds[REDIS_KEY]}")
 
 
 if __name__ == "__main__":

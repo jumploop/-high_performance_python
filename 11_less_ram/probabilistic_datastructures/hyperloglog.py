@@ -15,10 +15,7 @@ class HyperLogLog(LL):
             else:
                 Estar = E
         else:
-            if E <= 2 ** 32 / 30.0:
-                Estar = E
-            else:
-                Estar = -2 ** 32 * math.log(1 - E / 2 ** 32, 2)
+            Estar = E if E <= 2 ** 32 / 30.0 else -2 ** 32 * math.log(1 - E / 2 ** 32, 2)
         return int(Estar)
 
 

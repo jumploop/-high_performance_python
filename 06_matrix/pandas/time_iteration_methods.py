@@ -16,11 +16,10 @@ t1 = time.time()
 t1a = time.time()
 results = None
 for row_idx in range(df.shape[0]):
-    if row_idx % 10000 == 0:
-        if row_idx > 0:
-            t1b = time.time()
-            print(f"At row {row_idx:,} taking {t1b-t1a} for the last block")
-            t1a = t1b
+    if row_idx % 10000 == 0 and row_idx > 0:
+        t1b = time.time()
+        print(f"At row {row_idx:,} taking {t1b-t1a} for the last block")
+        t1a = t1b
     row = df.iloc[row_idx]
     m = ols_lstsq(row)
     if results is None:
@@ -52,7 +51,7 @@ for row_idx, row in df.iterrows():
 results = pd.Series(ms)
 t2 = time.time()
 assert_almost_equal(results_ols_lstsq[0], results[0])
-assert_array_almost_equal(results, results_ols_lstsq)  
+assert_array_almost_equal(results, results_ols_lstsq)
 print(f"Dereference with iterrows {t2 - t1}")
 
 
@@ -98,7 +97,7 @@ results = df.apply(ols_lstsq_raw_values_numba, axis=1, raw=True)
 t2 = time.time()
 print(f"Numba 1 ols_lstsq_raw_values_numba raw=True compilation pass {t2 - t1}")
 assert_almost_equal(results_ols_lstsq[0], results[0])
-assert_array_almost_equal(results, results_ols_lstsq)  
+assert_array_almost_equal(results, results_ols_lstsq)
 t1 = time.time()
 results = df.apply(ols_lstsq_raw_values_numba, axis=1, raw=True)
 t2 = time.time()
@@ -123,12 +122,12 @@ SCHEDULER = "processes"
 t1 = time.time()
 results = ddf.apply(ols_lstsq, axis=1, meta=(None, 'float64',)).compute(scheduler=SCHEDULER)
 t2 = time.time()
-assert_array_almost_equal(results, results_ols_lstsq)  
+assert_array_almost_equal(results, results_ols_lstsq)
 print(f"Dask ols_lstsq {t2 - t1}")
 t1 = time.time()
 results = ddf.apply(ols_lstsq_raw, axis=1, meta=(None, 'float64',), raw=True).compute(scheduler=SCHEDULER)
 t2 = time.time()
-assert_array_almost_equal(results, results_ols_lstsq)  
+assert_array_almost_equal(results, results_ols_lstsq)
 print(f"Dask ols_lstsq_raw raw=True {t2 - t1}")
 
 # without the meta arg it tells us what return type it inferred
@@ -147,7 +146,7 @@ assert_array_almost_equal(results, results_ols_lstsq)
 t1 = time.time()
 results = ddf.apply(ols_lstsq_raw_values_numba, axis=1, meta=(None, 'float64',), raw=True).compute(scheduler=SCHEDULER)
 t2 = time.time()
-assert_array_almost_equal(results, results_ols_lstsq)  
+assert_array_almost_equal(results, results_ols_lstsq)
 print(f"Dask ols_lstsq_raw_values_numba  {t2 - t1}")
 assert_array_almost_equal(results, results_ols_lstsq)  
 

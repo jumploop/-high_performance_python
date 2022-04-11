@@ -13,7 +13,7 @@ grid_shape = (640, 640)
 @profile
 def evolve(grid, dt, D=1.0):
     xmax, ymax = grid_shape
-    new_grid = [[0.0 for x in range(grid_shape[1])] for x in range(grid_shape[0])]
+    new_grid = [[0.0 for _ in range(grid_shape[1])] for _ in range(grid_shape[0])]
     for i in range(xmax):
         for j in range(ymax):
             grid_xx = (
@@ -28,7 +28,7 @@ def evolve(grid, dt, D=1.0):
 
 def run_experiment(num_iterations):
     # setting up initial conditions
-    grid = [[0.0 for x in range(grid_shape[1])] for x in range(grid_shape[0])]
+    grid = [[0.0 for _ in range(grid_shape[1])] for _ in range(grid_shape[0])]
 
     block_low = int(grid_shape[0] * 0.4)
     block_high = int(grid_shape[0] * 0.5)
@@ -37,7 +37,7 @@ def run_experiment(num_iterations):
             grid[i][j] = 0.005
 
     start = time.time()
-    for i in range(num_iterations):
+    for _ in range(num_iterations):
         grid = evolve(grid, 0.1)
     return time.time() - start
 

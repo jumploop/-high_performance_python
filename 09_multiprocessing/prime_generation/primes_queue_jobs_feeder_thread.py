@@ -31,7 +31,7 @@ def feed_new_jobs(number_range, possible_primes_queue, nbr_poison_pills):
     for possible_prime in number_range:
         possible_primes_queue.put(possible_prime)
     # add poison pills to stop the remote workers
-    for n in range(nbr_poison_pills):
+    for _ in range(nbr_poison_pills):
         possible_primes_queue.put(FLAG_ALL_DONE)
     print("ALL JOBS ADDED TO THE QUEUE")
 
@@ -70,7 +70,7 @@ if __name__ == "__main__":
     while True:
         new_result = definite_primes_queue.get()  # block whilst waiting for results
         if new_result == FLAG_WORKER_FINISHED_PROCESSING:
-            print("WORKER {} HAS JUST FINISHED".format(processors_indicating_they_have_finished))
+            print(f"WORKER {processors_indicating_they_have_finished} HAS JUST FINISHED")
             processors_indicating_they_have_finished += 1
             if processors_indicating_they_have_finished == args.nbr_workers:
                 break

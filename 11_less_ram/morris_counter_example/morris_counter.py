@@ -33,11 +33,11 @@ class MorrisCounter(object):
 
 if __name__ == "__main__":
     mc = MorrisCounter()
-    print("MorrisCounter has {} counters".format(len(mc)))
+    print(f"MorrisCounter has {len(mc)} counters")
     for n in range(10):
         print("Iteration %d, MorrisCounter has: %d" % (n, mc.get()))
         mc.add()
 
-    for n in range(990):
+    for _ in range(990):
         mc.add()
     print("Iteration 1000, MorrisCounter has: %d" % (mc.get()))
